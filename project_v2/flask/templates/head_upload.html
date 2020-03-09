@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>头像上传</title>
+    </head>
+    </script>
+    <div style="float:left;margin-left: 10px;">
+        <a href="/index" style="cursor:pointer;text-decoration-style:none;color: black;"><b style="font-size: 200%;">首页</b></a>
+    </div>
+    <div style="float: right;margin-left: 10px;">
+        <a href="/upload" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">投稿</b></a>
+        <a href="/myself" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">个人</b></a>
+        <a href="/loginout" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">退出登录</b></a>
+    </div>
+<body background="/static/back.png"style="background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;">
+    <hr>
+    <br><br><br><br>
+    <div style="position: relative;;left:250px;top：100px">
+
+<h1>头像上传</h1>
+<form action="" method="post" enctype="multipart/form-data">
+    <h2>图片上传（限png文件）</h2>
+    <p ><input type="file" name="file" style="width: 30%;"></p>
+    <p ><input type="submit" value="提交" style="width: 10%;height: 200%;"></p>
+</form>
+{% for message in get_flashed_messages() %}
+<p style="color:chocolate">{{ message }}</p>
+{% endfor %}
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>登录</title>
+    </head>
+    <form method="POST">
+        <body background="/static/back.png"    style="background-repeat:no-repeat;
+        background-size:100% 100%; 
+        background-attachment:fixed;">
+        
+        <div style="float:left;margin-left: 10px;">
+            <a href="/index" style="cursor:pointer;text-decoration-style:none;color: black;"><b style="font-size: 200%;">首页</b></a>
+        </div>
+        <div style="float: right;margin-left: 10px;">
+            <a href="/upload" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">投稿</b></a>
+            <a href="/login" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">登录</b></a>
+            <a href="/register" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">注册</b></a>
+        </div>
+            <hr>
+        
+        {{form.csrf_token()}}
+
+        <table style='position:fixed;text-align:left;margin-top:230px;margin-left:350px' cellspacing="10"  cellpadding="0">
+            <tr>
+                <th>登录</th>
+            </tr>
+            <tr>
+                <td>{{form.username.label}}</td>
+                <td>{{form.username}}</td>
+            </tr>
+            <tr>
+                <td>{{form.password.label}}</td>
+                <td>{{form.password}}</td>
+            </tr>
+            <tr>
+                <td>{{form.submit}}</td>
+                <td>
+                    {#通过循环捕获消息#}
+                    {%for message in get_flashed_messages()%}
+                        {{message}}
+                    {%endfor%}
+                </td>
+            </tr>
+        </table>
+        <br>
+
+        <table style="margin-top: 30px;margin-left: 350px;">
+            <tr>
+                <th>>登录后可享受：</th>
+            </tr>
+            <tr>
+                <th style="visibility:hidden;"></th>
+                <td>视频文件投稿</td>
+            </tr>
+            <tr>
+                <th style="visibility:hidden;"></th>
+                <td>发表弹幕、评论</td>
+            </tr>
+            <tr>
+                <th style="visibility:hidden;"></th>
+                <td>点赞、收藏喜欢的视频</td>
+            </tr>
+            <tr>
+                <th style="visibility:hidden;"></th>
+                <td>个人信息编辑</td>
+            </tr>
+        </table>
+
+        
+    </body>
+    </form>
+</html>

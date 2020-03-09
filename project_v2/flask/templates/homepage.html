@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>首页</title>
+
+    </head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <body background="/static/back.png"style="background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;" onload="jc()">
+
+        {%if activity%}
+            <div style="float:left;margin-left: 10px;">
+                <a href="/index" style="cursor:pointer;text-decoration-style:none;color: black;"><b style="font-size: 200%;">首页</b></a>
+            </div>
+            <div style="float: right;margin-left: 10px;">
+                <a href="/upload" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">投稿</b></a>
+                <a href="/myself" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">个人</b></a>
+                <a href="/loginout" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">退出登录</b></a>
+            </div>
+        {%else%}
+            <div style="float:left;margin-left: 10px;">
+                <a href="/index" style="cursor:pointer;text-decoration-style:none;color: black;"><b style="font-size: 200%;">首页</b></a>
+            </div>
+            <div style="float: right;margin-left: 10px;">
+                <a href="/upload" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">投稿</b></a>
+                <a href="/login" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">登录</b></a>
+                <a href="/register" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">注册</b></a>
+            </div>
+        {%endif%}
+    <hr>
+    <br>
+    
+    <br>
+    <script type="text/javascript">
+        function reload(){
+            $("#createarea").remove();
+            var adiv=document.createElement("div")
+            adiv.setAttribute("id","createarea");
+            adiv.setAttribute("class","createarea");
+            adiv.setAttribute("style","margin-left: 0%;");
+            $("#vbody").append(adiv)
+            jc();
+        }
+        function jc(){
+            var len=4;
+            while(len-->0){
+                createfm();
+            }
+            
+        }
+        function createfm(){
+            $.ajax({
+            url:"/show",
+            type:'GET',
+            success:function (resp) {
+        var lj=document.createElement("a");
+        lj.setAttribute("href","/video/"+resp.id);
+        lj.setAttribute("style","cursor:pointer")
+        lj.setAttribute("target","_blank")
+        var f5fm=document.createElement("form");
+        f5fm.id='f5_form';
+        f5fm.class="f5_form"; 
+        
+        lj.append(f5fm)
+        $("#createarea").append(lj)
+        var f5table=document.createElement("table");
+        f5table.setAttribute("border","1");
+        f5table.setAttribute("style","float:left;margin-left:10%;margin-top:50px;");
+        var tr1=document.createElement("tr");
+        var td11=document.createElement("td");
+        td11.append(resp.name)
+        td11.setAttribute("colspan",4);
+        td11.setAttribute("style","align-self: center;font-size:x-large;");
+        tr1.appendChild(td11)
+        f5table.appendChild(tr1)
+    
+        var tr2=document.createElement("tr");
+        var td21=document.createElement("td");
+        var td22=document.createElement("td");
+        var td23=document.createElement("td");
+        td21.setAttribute("rowspan",3);
+        var f5img=document.createElement("img")
+        f5img.setAttribute("src",resp.face);
+        f5img.setAttribute("width","200px");
+        f5img.setAttribute("height","200px");
+        td21.appendChild(f5img)
+        td22.append("视频分区:")
+        td22.setAttribute("style","font-size:x-large;")
+        td23.append(resp.style)
+        td23.setAttribute("style","align-self: center;font-size:large;")
+        tr2.appendChild(td21)
+        tr2.appendChild(td22)
+        tr2.appendChild(td23)
+        f5table.appendChild(tr2)
+    
+        var tr3=document.createElement("tr");
+        var td31=document.createElement("td");
+        var td32=document.createElement("td");
+        td31.append("作者:")
+        td31.setAttribute("style","font-size:x-large;")
+        td32.append(resp.user)
+        td32.setAttribute("style","align-self: center;font-size:large;")
+        tr3.appendChild(td31)
+        tr3.appendChild(td32)
+        f5table.appendChild(tr3)
+    
+        var tr4=document.createElement("tr");
+        var td41=document.createElement("td");
+        var td42=document.createElement("td");
+        td41.append("发布时间:")
+        td41.setAttribute("style","font-size:x-large;")
+        td42.append(resp.birthday)
+        td42.setAttribute("style","align-self: center;font-size:large;")
+        tr4.appendChild(td41)
+        tr4.appendChild(td42)
+        f5table.appendChild(tr4)
+    
+        f5fm.appendChild(f5table)
+
+    }
+        })
+                    };
+    </script>
+    <button onclick="reload()" style="margin-left: 40%;size: 10%;">（╯－＿－）╯╧╧ 换一批？</button>
+    <div  style="margin-left: 15%;float: left;" >
+    <form method='POST'>
+    <input type="text"  id='search' class='search' name='search'><button type="submit" style="margin-left: 0px;">搜索</button>
+    </form>
+</div>
+    <div id="vbody" class="vbody">
+    <div id="createarea" class="createarea" style="margin-left: 0px;"></div>
+    
+    </div>
+
+</body>
+</html>

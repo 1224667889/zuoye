@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/css/dateTime.css">
+        <title>资料修改</title>
+        
+    </head>
+    
+
+    
+
+    <body background="/static/back.png"    style="background-repeat:no-repeat;background-size:100% 100%; background-attachment:fixed;">
+        <div style="float:left;margin-left: 10px;">
+            <a href="/index" style="cursor:pointer;text-decoration-style:none;color: black;"><b style="font-size: 200%;">首页</b></a>
+        </div>
+        <div style="float: right;margin-left: 10px;">
+            <a href="/upload" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">投稿</b></a>
+            <a href="/myself" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">个人</b></a>
+            <a href="/loginout" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">退出登录</b></a>
+        </div>
+        <hr>
+        <br><br><br><br><br>
+        <div style="margin-left: 10%;">
+        <form method="POST">
+        {{form.csrf_token()}}
+        <table height="80%" width="80%" style='text-align:left;margin-top:0px;margin-left:40px' cellspacing="10"  cellpadding="0">
+            <tr>
+                <th style="font-size: x-large;">个人信息修改</th>
+                <th style="visibility:hidden;font-size: x-large;"></th>
+                <th style="visibility:hidden;font-size: x-large;">密码以字母开头，长度在6~18之间，只能包含字母、数字和下划线</th>
+            </tr>
+            <tr>
+                <th style="font-size: large;">{{form.birthday.label}}</th>
+                <th style="font-size: large;">{{form.birthday}}</th>
+                <th style="font-size: large;">{% for err in form.birthday.errors %}
+                        <div class="col-md-12">
+                            <span style="color: red">{{ err }}</span>
+                        </div>
+                    {% endfor %}</th>
+            </tr>
+            <tr>
+                <th style="font-size: large;">{{form.sex.label}}</th>
+                <th style="font-size: large;">{{form.sex}}</th>
+                <th style="font-size: large;">{% for err in form.sex.errors %}
+                        <div class="col-md-12">
+                            <span style="color: red">{{ err }}</span>
+                        </div>
+                    {% endfor %}</th>
+            </tr>
+            <tr>
+                <th style="font-size: large;">{{form.signature.label}}</th>
+                <th style="font-size: large;">{{form.signature}}</th>
+                <th style="font-size: large;">{% for err in form.signature.errors %}
+                        <div class="col-md-12">
+                            <span style="color: red">{{ err }}</span>
+                        </div>
+                    {% endfor %}</th>
+            </tr>
+        </table>
+<br>
+        <div id="tips" style="margin-left:40px;font-size:150%">
+            <span style="font-size:150%">注意：<br></span>
+            <span style="color: gray"></span>
+            生日格式为  “xxxx-xx-xx”<br>
+        </div>
+<br>
+        
+        <span style="font-size:150%;margin-left:40px">{{form.submit}}</span> 
+        {%for message in get_flashed_messages()%}
+        {{message}}
+    {%endfor%}
+
+
+    </form>
+</div>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/dateTime.min.js"></script>
+<script type="text/javascript">
+$("#date").datetime({
+	type:"date",
+	value:[2019,9,31],
+	success:function(res){
+		console.log(res)
+	}
+})
+
+$("#time").datetime({
+	type:"time",
+	value:[12,28]
+})
+
+$("#datetime").datetime({
+	type:"datetime",
+	value:[2019,7,15,15,30]
+})
+</script>
+    </body>
+</html>

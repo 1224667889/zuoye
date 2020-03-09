@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>个人界面</title>
+    </head>
+    <div style="float:left;margin-left: 10px;">
+        <a href="/index" style="cursor:pointer;text-decoration-style:none;color: black;"><b style="font-size: 200%;">首页</b></a>
+    </div>
+    <div style="float: right;margin-left: 10px;">
+        <a href="/upload" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">投稿</b></a>
+        <a href="/myself" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">个人</b></a>
+        <a href="/loginout" style="cursor:pointer;text-decoration-style:none;color: black;" ><b style="font-size: 200%;">退出登录</b></a>
+    </div>
+<body background="/static/back.png"style="background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;">
+        <hr>
+        <br><br><br><br>
+        <div id="data" style="float:left;margin-left: 10%;">
+            <h1 style="left:150px;margin-top：300px;">用户资料</h1>
+            
+    <table>
+        <tr>
+            <th><font size="10">头像：</font></th>
+            <th><a href="/changehead"><img src="{{message.head}}" ,alt="点击修改头像" style="cursor:pointer;" width="100" height="100"></a></th>
+            <th><a href='/changehead'>更换头像</a></th>
+        </tr>
+        <tr>
+            <th><font size="5">用户名：</font></th>
+            <th><font size="5">{{user_name}}</font></th>
+            <th><a href='/loginout'>退出登录</a></th>
+        </tr>
+        <tr>
+            <th><font size="5">性别：</font></th>
+            <th><font size="5">{{message.sex}}</font></th>
+        </tr>
+        <tr>
+            <th><font size="5">生日：</font></th>
+            <th><font size="5">{{message.birthday}}</font></th>
+        </tr>
+        <tr>
+            <th><font size="5">信誉情况：</font></th>
+            <th><font size="5">
+            {%if message.bantime%}
+            限制部分功能至：{{message.bantime}}
+            {%else%}
+                无不良行为
+            {%endif%}
+        </th>
+        <th><a href='/change'>修改密码</a></th>
+        <tr>
+            <th><font size="5">个性签名：</font></th>
+            <th><textarea cols="30" rows="5" readonly="readonly">{{message.signature}}</textarea> </th>
+            <th><a href='/changedata'>更改个人资料</a></th>
+        </tr>
+        </tr>
+        </table>
+        
+
+        <div id="admin">
+        {%if role_name == "admin"%}
+            <a href="/admin"><h1>管理员系统</h1></a>
+        {% endif %}
+        </div>
+
+
+    </div>
+    <div style="float:left;margin-left: 10%;">
+    <h1>>收藏夹：</h1>
+
+    {%for collect in user.collects%}
+
+    <a href="/video/{{collect.video_id}}" target="_blank" style="font-size: 25px;">
+    {{collect.videomessage.name}}
+    ({{collect.videomessage.style.content}})
+    <br>
+</a>
+
+    {%endfor%}
+</div>
+<hr style="float: right;margin-left: 2500px;">
+<div style="float:left;margin-left: 10%;">
+    <h1>投稿：</h1>
+    {%for video in user.videos%}
+
+    <a href="/video/{{video.id}}" target="_blank" style="font-size: 25px;">
+    {{video.name}}
+    ({{video.style.content}})
+    <br>
+    </a>
+
+    {%endfor%}
+    </div>
+
+</body>
+</html>
